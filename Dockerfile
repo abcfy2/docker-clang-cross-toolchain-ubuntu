@@ -12,7 +12,7 @@ ENV REPO_URL="https://github.com/cross-tools/clang-cross"
 RUN export DEBIAN_FRONTEND=noninteractive && \
   mkdir -p "${CROSS_ROOT}" && \
   apt update && \
-  apt install -y wget xz-utils && \
+  apt install -y libxml2 wget xz-utils && \
   wget -cT10 -P /tmp "${REPO_URL}/releases/latest/download/${ARCH}.tar.xz" && \
   SHA256SUM="$(wget -qO- "${REPO_URL}/releases/latest/download/${ARCH}.tar.xz.sha256")" && \
   cd /tmp && \

@@ -7,7 +7,7 @@ This image can be also found in [GHCR](https://github.com/abcfy2/docker-clang-cr
 
 `Dockerfile` can be found at [abcfy2/docker-clang-cross-toolchain-ubuntu#Dockerfile](https://github.com/abcfy2/docker-clang-cross-toolchain-ubuntu/blob/main/Dockerfile).
 
-This is the musl / gcc based toolchain from [clang-cross](https://github.com/cross-tools/clang-cross/).
+This is the musl & glibc based toolchain from [clang-cross](https://github.com/cross-tools/clang-cross/).
 
 This is useful for some building environments which require a glibc based library.
 
