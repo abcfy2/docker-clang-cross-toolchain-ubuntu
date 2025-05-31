@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  DOCKER_REPOSITORY: abcfy2/musl-cross-toolchain-ubuntu
+  DOCKER_REPOSITORY: abcfy2/clang-cross-toolchain-ubuntu
 
 jobs:
   dockerHubDescription:

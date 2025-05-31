@@ -1,13 +1,13 @@
 FROM ubuntu:latest
 LABEL org.opencontainers.image.authors="abcfy2@163.com"
 
-ARG ARCH=arm-unknown-linux-musleabi
+ARG ARCH=aarch64-unknown-linux-gnu
 
 ENV CROSS_HOST="${ARCH}"
 ENV CROSS_ROOT="/cross_root"
 ENV PATH="${CROSS_ROOT}/bin:${PATH}"
 ENV CROSS_PREFIX="${CROSS_ROOT}/${CROSS_HOST}"
-ENV REPO_URL="https://github.com/cross-tools/musl-cross"
+ENV REPO_URL="https://github.com/cross-tools/clang-cross"
 
 RUN export DEBIAN_FRONTEND=noninteractive && \
   mkdir -p "${CROSS_ROOT}" && \

@@ -12,9 +12,9 @@ on:
     - cron: "0 0 * * 6"
 
 env:
-  DOCKER_REPOSITORY: abcfy2/musl-cross-toolchain-ubuntu
-  GHCR_REPOSITORY: ghcr.io/${{ github.repository_owner }}/musl-cross-toolchain-ubuntu
-  QUAY_IO_REPOSITORY: quay.io/${{ github.repository_owner }}/musl-cross-toolchain-ubuntu
+  DOCKER_REPOSITORY: abcfy2/clang-cross-toolchain-ubuntu
+  GHCR_REPOSITORY: ghcr.io/${{ github.repository_owner }}/clang-cross-toolchain-ubuntu
+  QUAY_IO_REPOSITORY: quay.io/${{ github.repository_owner }}/clang-cross-toolchain-ubuntu
 
 jobs:
   docker:
@@ -28,30 +28,47 @@ jobs:
       fail-fast: false
       matrix:
         arch:
+          - aarch64-unknown-linux-gnu
           - aarch64-unknown-linux-musl
+          - arm-unknown-linux-gnueabi
+          - arm-unknown-linux-gnueabihf
           - arm-unknown-linux-musleabi
           - arm-unknown-linux-musleabihf
+          - armv7-unknown-linux-gnueabi
+          - armv7-unknown-linux-gnueabihf
           - armv7-unknown-linux-musleabi
           - armv7-unknown-linux-musleabihf
+          - i586-unknown-linux-gnu
           - i586-unknown-linux-musl
+          - i686-unknown-linux-gnu
           - i686-unknown-linux-musl
+          - loongarch64-unknown-linux-gnu
           - loongarch64-unknown-linux-musl
-          - m68k-unknown-linux-musl
-          - microblaze-xilinx-linux-musl
-          - microblazeel-xilinx-linux-musl
-          - mips-unknown-linux-musl
-          - mips-unknown-linux-muslsf
-          - mips64-unknown-linux-musl
+          - mips64el-unknown-linux-gnu
           - mips64el-unknown-linux-musl
+          - mips64-unknown-linux-gnu
+          - mips64-unknown-linux-musl
+          - mipsel-unknown-linux-gnu
+          - mipsel-unknown-linux-gnusf
           - mipsel-unknown-linux-musl
           - mipsel-unknown-linux-muslsf
-          - powerpc-unknown-linux-musl
+          - mips-unknown-linux-gnu
+          - mips-unknown-linux-gnusf
+          - mips-unknown-linux-musl
+          - mips-unknown-linux-muslsf
+          - powerpc64-unknown-linux-gnu
           - powerpc64-unknown-linux-musl
+          - powerpc-unknown-linux-gnu
+          - powerpc-unknown-linux-musl
+          - riscv32-unknown-linux-gnu
           - riscv32-unknown-linux-musl
+          - riscv64-unknown-linux-gnu
           - riscv64-unknown-linux-musl
+          - s390x-ibm-linux-gnu
           - s390x-ibm-linux-musl
-          - sh4-multilib-linux-musl
+          - x86_64-unknown-linux-gnu
           - x86_64-unknown-linux-musl
+
     steps:
       - name: Determine if push is needed
         run: |
@@ -59,7 +76,7 @@ jobs:
           echo "GITHUB_EVENT_NAME = ${GITHUB_EVENT_NAME}"
           PUSH=true
           if [ "${GITHUB_EVENT_NAME}" = "schedule" ]; then
-            REPO_URL="https://github.com/cross-tools/musl-cross"
+            REPO_URL="https://github.com/cross-tools/clang-cross"
             UPSTREAM_SHA256SUM="$(curl -sSLf --compressed "${REPO_URL}/releases/latest/download/${ARCH}.tar.xz.sha256")"
             DOWNSTREAM_SHA256SUM="$(docker run --pull=always --rm "${GHCR_REPOSITORY}:${ARCH}" cat /SHA256SUM.txt)" || true
             if [ "${UPSTREAM_SHA256SUM}" = "${DOWNSTREAM_SHA256SUM}" ]; then
